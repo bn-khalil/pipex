@@ -48,8 +48,9 @@ int main(int ac, char **av, char **env)
 {
     int fds[2];
     int pid;
+    int pid2;
 
-    pid = 0;
+
     if (ac != 5)
         put_message("Error: invalid arguments\n");
     if (!env || !env[0])
@@ -61,11 +62,11 @@ int main(int ac, char **av, char **env)
         put_message("Error: fork()\n");
     if (pid == 0)
         execution_child(fds, av[1], env, av[2]);
-    else
-    {
-        waitpid(pid, NULL, 0);
-        execution_parent(fds, av[4], env, av[3]);
-    }
+    pid2 = fork();
+     if (pid2 == 0)
+         execution_parent(fds, av[4], env, av[3]);
     ft_closer(fds[0], fds[1], -1, -1);
+    waitpid(pid, NULL, 0);
+    waitpid(pid2, NULL, 0);
     return (0);
 }
