@@ -87,11 +87,13 @@ int main()
     // }
 
     // https://github.imc.re/michmos/42_pipex_tester
+    // $ ./pipex infile "grep 'great'" "wc -w" outfile
     
-    int fd = open("test", O_RDWR);
-    int fd2 = open("main", O_RDWR);
-    dup2(fd, fd2);
-    close(fd);
+    // int fd = open("test", O_RDWR);
+    // int fd2 = open("main", O_RDWR);
+    // dup2(fd, fd2);
+    // close(fd);
+    printf("sd\"");
     
     
     return (0);
