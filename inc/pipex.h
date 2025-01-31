@@ -3,8 +3,7 @@
 
 #include <unistd.h>
 #include <fcntl.h>
-#include <sys/wait.h>
-#include <stdlib.h>
+#include <libc.h>
 void    put_message(char *msg);
 char	**ft_split(char const *s, char c);
 size_t	ft_strlen(const char *s);

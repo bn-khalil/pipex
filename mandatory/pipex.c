@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:58:49 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/29 13:27:23 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/31 17:08:24 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ static void execution_child(int fds[], char *filename, char **env, char *command
         ft_closer(fds[0], fds[1], -1, -1);
         put_message("Error: no such file or directory\n");
     }
-    dup2(fds[1], STDOUT_FILENO);
+    close(fds[0]);
     dup2(infd, STDIN_FILENO);
-    ft_closer(fds[0], fds[1], infd, -1);
+    close(infd);
+    dup2(fds[1], STDOUT_FILENO);
+    close(fds[1]);
     execute_command(command, env);
 }
 
@@ -38,10 +40,17 @@ static void execution_parent(int fds[], char *filename, char **env, char *comman
         ft_closer(fds[0], fds[1], -1, -1);
         put_message("Error: no such file or directory\n");
     }
+    close(fds[1]);
     dup2(fds[0], STDIN_FILENO);
+    close(fds[0]);
     dup2(outfd, STDOUT_FILENO);
-    ft_closer(fds[0], fds[1], -1, -1);
+    close(outfd);
     execute_command(command, env);
+}
+
+void    f()
+{
+    system("leaks pipex; lsof -c pipex");
 }
 
 int main(int ac, char **av, char **env)
@@ -50,7 +59,7 @@ int main(int ac, char **av, char **env)
     int pid;
     int pid2;
 
-
+    atexit(f);
     if (ac != 5)
         put_message("Error: invalid arguments\n");
     if (!env || !env[0])
@@ -59,12 +68,15 @@ int main(int ac, char **av, char **env)
         put_message("Error: pipe\n");
     pid = fork();
     if (pid < 0)
+    {
+        ft_closer(fds[0], fds[1], -1, -1);
         put_message("Error: fork()\n");
+    }
     if (pid == 0)
         execution_child(fds, av[1], env, av[2]);
     pid2 = fork();
-     if (pid2 == 0)
-         execution_parent(fds, av[4], env, av[3]);
+    if (pid2 == 0)
+        execution_parent(fds, av[4], env, av[3]);
     ft_closer(fds[0], fds[1], -1, -1);
     waitpid(pid, NULL, 0);
     waitpid(pid2, NULL, 0);

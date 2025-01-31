@@ -6,7 +6,7 @@
 #    By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 17:28:39 by kben-tou          #+#    #+#              #
-#    Updated: 2025/01/29 13:20:02 by kben-tou         ###   ########.fr        #
+#    Updated: 2025/01/31 13:00:20 by kben-tou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ $(NAME): $(OBJS)
 bonus: $(NAME) $(NAME_B)
 
 $(NAME_B): $(OBJS_B)
-	cc $(CFLAGS) $(OBJS_B) -o $@
+	cc $(CFLAGS) $(OBJS_B) -o $(NAME)
 
 clean: 
 	rm -rf $(OBJS) $(OBJS_B)

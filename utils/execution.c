@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 21:22:11 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/29 13:03:45 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/31 17:08:11 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ char *parse_command(char *command)
 {
     if (!command || !command[0])
         put_message("permission denied\n");
-    if (command[0] == ' ' || command[ft_strlen(command) - 1] == ' ')
-        put_message("command not found!\n");
     return (command);
 }
 
