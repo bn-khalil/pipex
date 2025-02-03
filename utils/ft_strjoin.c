@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 10:29:23 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/25 10:32:01 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/02/02 22:35:24 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,18 @@ char	*ft_strjoin(char *s1, char *s2)
 	str[i] = '\0';
 	free(s1);
 	return (str);
+}
+
+int	ft_opner_file(int status, char *filename)
+{
+	int	fd;
+
+	fd = -1;
+	if (status == 2)
+		fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0777);
+	else if (status == 3)
+		fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0777);
+	else if (status == 5)
+		fd = open(filename, O_RDONLY);
+	return (fd);
 }

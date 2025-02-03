@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/12 18:23:41 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/30 19:26:28 by kben-tou         ###   ########.fr       */
+/*   Created: 2025/02/02 12:58:15 by kben-tou          #+#    #+#             */
+/*   Updated: 2025/02/02 22:35:38 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_next_line(int fd)
 	char	*line;
 
 	line = NULL;
-	buff = malloc(2);
+	buff = malloc(2000);
 	if (!buff)
 		return (NULL);
 	readed = 1;

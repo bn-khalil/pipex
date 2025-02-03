@@ -6,15 +6,16 @@
 #    By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 17:28:39 by kben-tou          #+#    #+#              #
-#    Updated: 2025/01/31 13:00:20 by kben-tou         ###   ########.fr        #
+#    Updated: 2025/02/02 22:22:05 by kben-tou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 M = mandatory
-U = utils
 B = bonus
+U = utils
+UB = utils_bonus
 NAME = pipex
-NAME_B = pipex_bonus
+NAME_B = .bonus
 
 FILS = $(M)/pipex.c \
 		$(U)/put_message.c \
@@ -23,10 +24,10 @@ FILS = $(M)/pipex.c \
 		$(U)/ft_strlen.c \
 		$(U)/ft_strjoin.c \
 		$(U)/ft_strdup.c \
+		$(U)/get_next_line.c \
 		$(U)/ft_strchr.c \
 		$(U)/ft_strncmp.c \
 		$(U)/execution.c \
-		$(U)/get_next_line.c \
 
 FILS_B = $(B)/pipex_bonus.c \
 		$(U)/put_message.c \
@@ -35,10 +36,10 @@ FILS_B = $(B)/pipex_bonus.c \
 		$(U)/ft_strlen.c \
 		$(U)/ft_strjoin.c \
 		$(U)/ft_strdup.c \
+		$(U)/get_next_line.c \
 		$(U)/ft_strchr.c \
 		$(U)/ft_strncmp.c \
 		$(U)/execution.c \
-		$(U)/get_next_line.c \
 
 CFLAGS =  -Wall -Wextra -Werror
 
@@ -47,18 +48,19 @@ OBJS_B = $(FILS_B:.c=.o)
 
 all: $(NAME)
 
-%.o: %.c inc/pipex.h
-	cc $(CFLAGS) -c $< -o $@
-
 $(NAME): $(OBJS)
 	cc $(CFLAGS) $(OBJS) -o $@
 
-bonus: $(NAME) $(NAME_B)
+%.o: %.c inc/pipex.h
+	cc $(CFLAGS) -c $< -o $@
+
+bonus: $(NAME_B)
 
 $(NAME_B): $(OBJS_B)
 	cc $(CFLAGS) $(OBJS_B) -o $(NAME)
+	@touch $(NAME_B)
 
-clean: 
+clean:
 	rm -rf $(OBJS) $(OBJS_B)
 
 fclean: clean
