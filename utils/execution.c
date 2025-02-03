@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 21:22:11 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/02/02 22:34:51 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:33:39 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*get_path_command(char *command, char **env, char **cmd_flags)
 
 char	*parse_command(char *command)
 {
-	if (!command || !command[0])
+	if (command && !command[0])
 		put_message("permission denied\n");
 	return (command);
 }
@@ -89,7 +89,8 @@ void	execute_command(char *command, char **env)
 	}
 	else
 	{
-		if (cmd_flag[0][0] == '.')
+		if (cmd_flag[0][0] == '.' && cmd_flag[0][1] == '/' && \
+		(cmd_flag[0][2] == '.' || ft_isalpha(cmd_flag[0][2])))
 			put_and_free("Error: No such file or directory\n", cmd_flag);
 		path_command = get_path_command(cmd_flag[0], env, cmd_flag);
 		if (!path_command)

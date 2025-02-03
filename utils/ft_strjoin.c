@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 10:29:23 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/02/02 22:35:24 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:16:17 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,16 @@ int	ft_opner_file(int status, char *filename)
 	else if (status == 5)
 		fd = open(filename, O_RDONLY);
 	return (fd);
+}
+
+void	close_all_unused_fds(void)
+{
+	int	fd;
+
+	fd = 3;
+	while (fd < OPEN_MAX)
+	{
+		close(fd);
+		fd++;
+	}
 }

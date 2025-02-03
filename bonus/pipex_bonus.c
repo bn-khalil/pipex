@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 19:28:24 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/02/02 22:32:44 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:16:30 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ static void	child_process(char *command, char **env, int infd, int outfd)
 	pid = fork();
 	if (pid < 0)
 	{
-		ft_closer(infd, outfd, -1, -1);
+		close_all_unused_fds();
 		put_message("Error: fork()\n");
 	}
 	if (pid == 0)
 	{
 		dup2(infd, STDIN_FILENO);
-		close(infd);
 		dup2(outfd, STDOUT_FILENO);
-		close(outfd);
+		close_all_unused_fds();
 		execute_command(command, env);
 	}
 }
@@ -45,18 +44,18 @@ static void	pipeline(int s[], char **av, char **env, int infd)
 	{
 		piper(fds, prev_in, infd);
 		child_process(av[i], env, prev_in, fds[1]);
-		ft_closer(prev_in, fds[1], infd, -1);
+		ft_closer(prev_in, fds[1], -1, -1);
 		prev_in = fds[0];
 		i++;
 	}
 	outfd = ft_opner_file(s[0], av[s[1] - 1]);
 	if (outfd < 0)
 	{
-		ft_closer(prev_in, -1, infd, -1);
+		close_all_unused_fds();
 		put_message("Error: no such file or directory\n");
 	}
 	child_process(av[i], env, prev_in, outfd);
-	ft_closer(prev_in, -1, -1, outfd);
+	close_all_unused_fds();
 	while (wait(NULL) > 0)
 		;
 }
@@ -66,7 +65,6 @@ static void	read_and_fill(char **av)
 	char	*line;
 	int		tmpfd;
 
-	line = NULL;
 	tmpfd = ft_opner_file(2, "/tmp/here_doc");
 	if (tmpfd < 0)
 		put_message("Error: no such file or directory\n");
@@ -110,7 +108,7 @@ int	main(int ac, char **av, char **env)
 	start_end[1] = ac;
 	if (ac < 5)
 		put_message("Error: invalid arguments!\n");
-	if (!env || !env[0])
+	if (!env)
 		put_message("Error: no environment variables!\n");
 	if (ft_strncmp("here_doc", av[1], ft_strlen("here_doc")) == 0)
 	{

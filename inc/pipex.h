@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:08:06 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/02/02 22:36:52 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:17:04 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 
 void	put_message(char *msg);
 char	**ft_split(char const *s, char c);
@@ -36,5 +37,7 @@ void	ft_closer(int read_end, int write_end, int infd, int outfd);
 void	put_and_free(char *msg, char **content);
 void	piper(int fds[], int prev_in, int infd);
 int		ft_opner_file(int status, char *filename);
+void	close_all_unused_fds(void);
+int		ft_isalpha(int c);
 
 #endif

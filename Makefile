@@ -6,14 +6,13 @@
 #    By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 17:28:39 by kben-tou          #+#    #+#              #
-#    Updated: 2025/02/02 22:22:05 by kben-tou         ###   ########.fr        #
+#    Updated: 2025/02/03 16:43:12 by kben-tou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 M = mandatory
 B = bonus
 U = utils
-UB = utils_bonus
 NAME = pipex
 NAME_B = .bonus
 
