@@ -6,11 +6,11 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:58:49 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/02/03 16:17:44 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:47:01 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "./pipex.h"
 
 static void	execution_child(int fds[], char *filename, \
 char **env, char *command)

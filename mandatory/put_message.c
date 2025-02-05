@@ -6,11 +6,11 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:23:07 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/02/03 12:42:05 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:08:03 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "./pipex.h"
 
 void	put_message(char *msg)
 {

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   execution_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 21:22:11 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/02/03 16:33:39 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:07:10 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "./pipex_bonus.h"
 
 char	*get_path(char **env)
 {
@@ -54,10 +54,10 @@ char	*get_path_command(char *command, char **env, char **cmd_flags)
 
 	path = get_path(env);
 	if (!path)
-		put_and_free("Error: PATH!\n", cmd_flags);
+		put_and_free("command not found\n", cmd_flags);
 	directions = ft_split(path + 5, ':');
 	if (!directions || !directions[0])
-		put_and_free("Error: PATH!\n", cmd_flags);
+		put_and_free("command not found\n", cmd_flags);
 	command_path = ft_joiner(directions, command);
 	ft_free_2d(directions);
 	if (!command_path)
@@ -90,7 +90,8 @@ void	execute_command(char *command, char **env)
 	else
 	{
 		if (cmd_flag[0][0] == '.' && cmd_flag[0][1] == '/' && \
-		(cmd_flag[0][2] == '.' || ft_isalpha(cmd_flag[0][2])))
+		(cmd_flag[0][2] == '.' || ft_isalpha(cmd_flag[0][2])) && \
+		ft_strncmp(cmd_flag[0], "./../../../../../", 16) != 0)
 			put_and_free("Error: No such file or directory\n", cmd_flag);
 		path_command = get_path_command(cmd_flag[0], env, cmd_flag);
 		if (!path_command)

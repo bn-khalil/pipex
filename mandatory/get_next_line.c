@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/25 10:56:09 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/02/02 22:35:17 by kben-tou         ###   ########.fr       */
+/*   Created: 2025/02/02 12:58:15 by kben-tou          #+#    #+#             */
+/*   Updated: 2025/02/05 12:47:49 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "./pipex.h"
 
-char	*ft_strdup(const char *s1)
+char	*get_next_line(int fd)
 {
-	size_t	i;
-	char	*p;
+	char	*buff;
+	int		readed;
+	char	*line;
 
-	p = (char *)malloc(ft_strlen(s1) + 1);
-	if (!p)
+	line = NULL;
+	buff = malloc(2000);
+	if (!buff)
 		return (NULL);
-	i = -1;
-	while (s1[++i])
-		p[i] = s1[i];
-	p[i] = '\0';
-	return (p);
+	readed = 1;
+	while (readed > 0)
+	{
+		readed = read(fd, buff, 1);
+		if (readed == 0)
+			break ;
+		buff[readed] = '\0';
+		line = ft_strjoin(line, buff);
+		if (!line)
+			break ;
+		if (ft_strchr(line, '\n'))
+			break ;
+	}
+	free(buff);
+	return (line);
 }

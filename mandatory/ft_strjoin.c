@@ -6,11 +6,11 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 10:29:23 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/02/03 16:16:17 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:07:26 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "./pipex.h"
 
 char	*ft_strjoin(char *s1, char *s2)
 {

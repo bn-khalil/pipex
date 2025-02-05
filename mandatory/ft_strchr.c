@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 22:25:12 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/02/02 22:35:32 by kben-tou         ###   ########.fr       */
+/*   Created: 2024/10/23 10:56:07 by kben-tou          #+#    #+#             */
+/*   Updated: 2025/02/05 14:07:55 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "./pipex.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char	*ft_strchr(const char *s, int c)
 {
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	if (needle[0] == '\0')
-		return ((char *)haystack);
-	if (len == 0)
-		return (NULL);
-	while (haystack[i])
+	while (*s)
 	{
-		j = 0;
-		while (i + j < len && haystack[i + j] == needle[j] && needle[j])
-		{
-			if (needle[j + 1] == '\0')
-				return ((char *)haystack + i);
-			j++;
-		}
-		i++;
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
 	}
+	if ((char)c == '\0')
+		return ((char *)s);
 	return (NULL);
+}
+
+int	ft_isalpha(int c)
+{
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	return (0);
 }

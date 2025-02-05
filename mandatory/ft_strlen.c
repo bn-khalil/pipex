@@ -1,40 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/02 12:58:15 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/02/02 22:35:38 by kben-tou         ###   ########.fr       */
+/*   Created: 2024/10/22 18:34:51 by kben-tou          #+#    #+#             */
+/*   Updated: 2025/02/05 14:07:29 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "./pipex.h"
 
-char	*get_next_line(int fd)
+size_t	ft_strlen(const char *s)
 {
-	char	*buff;
-	int		readed;
-	char	*line;
+	size_t	i;
 
-	line = NULL;
-	buff = malloc(2000);
-	if (!buff)
-		return (NULL);
-	readed = 1;
-	while (readed > 0)
-	{
-		readed = read(fd, buff, 1);
-		if (readed == 0)
-			break ;
-		buff[readed] = '\0';
-		line = ft_strjoin(line, buff);
-		if (!line)
-			break ;
-		if (ft_strchr(line, '\n'))
-			break ;
-	}
-	free(buff);
-	return (line);
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }

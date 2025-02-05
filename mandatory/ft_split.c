@@ -6,30 +6,35 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:44:11 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/02/02 12:46:14 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:58:50 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "./pipex.h"
 
 static size_t	words_count(const char *s, char c)
 {
 	size_t	i;
 	size_t	count;
-	size_t	is_in;
+	char	quote;
 
 	i = 0;
 	count = 0;
-	is_in = 0;
+	quote = 0;
 	while (s[i])
 	{
-		if (s[i] != c && is_in == 0)
+		if (s[i] == '\'' || s[i] == '"')
 		{
 			count++;
-			is_in = 1;
+			quote = s[i];
+			while (s[++i] && s[i] != quote)
+				;
+			if (s[i] == quote)
+				i++;
+			quote = 0;
 		}
-		else if (s[i] == c)
-			is_in = 0;
+		else if (s[i] != c && (i == 0 || s[i - 1] == c) && !quote)
+			count++;
 		i++;
 	}
 	return (count);
@@ -66,17 +71,27 @@ static char	*store_next_word(const char *s, size_t *i, char c)
 {
 	char	*p;
 	size_t	char_count;
+	char	q;
 
 	char_count = 0;
+	q = 0;
 	while (s[*i] && s[*i] == c)
 		(*i)++;
-	while (s[*i + char_count] && s[*i + char_count] != c)
+	if (s[*i] == '\'' || s[*i] == '"' )
+	{
+		q = s[*i];
+		(*i)++;
+	}
+	while (s[*i + char_count] && ((!q && s[*i + char_count] != c) || \
+	(q && s[*i + char_count] != q)))
 		char_count++;
 	p = (char *)malloc(char_count + 1);
 	if (!p)
 		return (NULL);
 	fill(p, s, *i, char_count);
 	*i += char_count;
+	if (q && s[*i] == q)
+		(*i)++;
 	return (p);
 }
 

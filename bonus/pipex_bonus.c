@@ -6,11 +6,11 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 19:28:24 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/02/03 16:16:30 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:46:53 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "./pipex_bonus.h"
 
 static void	child_process(char *command, char **env, int infd, int outfd)
 {
@@ -110,7 +110,7 @@ int	main(int ac, char **av, char **env)
 		put_message("Error: invalid arguments!\n");
 	if (!env)
 		put_message("Error: no environment variables!\n");
-	if (ft_strncmp("here_doc", av[1], ft_strlen("here_doc")) == 0)
+	if (ft_strncmp("here_doc", av[1], 9) == 0)
 	{
 		if (ac != 6)
 			put_message("Error: invalid arguments!\n");
