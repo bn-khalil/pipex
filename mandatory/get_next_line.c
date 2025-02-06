@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:58:15 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/02/05 12:47:49 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:32:26 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_next_line(int fd)
 	char	*line;
 
 	line = NULL;
-	buff = malloc(2000);
+	buff = malloc(2);
 	if (!buff)
 		return (NULL);
 	readed = 1;

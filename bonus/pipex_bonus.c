@@ -6,11 +6,13 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 19:28:24 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/02/05 15:46:53 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:33:28 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./pipex_bonus.h"
+
+#include <libc.h>
 
 static void	child_process(char *command, char **env, int infd, int outfd)
 {
@@ -74,7 +76,9 @@ static void	read_and_fill(char **av)
 		line = get_next_line(0);
 		if (!line)
 			break ;
-		if (ft_strncmp(av[2], line, ft_strlen(av[2])) == 0)
+		printf("%zu\n%zu\n", strlen(av[2]), strlen(line));
+		if (ft_strncmp(av[2], line, ft_strlen(av[2])) == 0 && \
+		ft_strlen(line) - 1 == ft_strlen(av[2]))
 			break ;
 		write(tmpfd, line, ft_strlen(line));
 		free(line);
